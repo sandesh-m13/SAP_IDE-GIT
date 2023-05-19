@@ -1,9 +1,10 @@
 sap.ui.define([
+	"ui/pmc/pricing/controller/BaseController",
 	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+], function(Controller, BaseController) {
 	"use strict";
 
-	return Controller.extend("ui.pmc.pricing.controller.PricingMainView", {
+	return BaseController.extend("ui.pmc.pricing.controller.PricingMainView", {
 
 	});
 });
