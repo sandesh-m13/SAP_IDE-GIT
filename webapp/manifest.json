@@ -68,6 +68,15 @@
 			"purchaseitems": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/purchase.json"
+			},
+			"tableItems":{
+			    "type":"sap.ui.model.json.JSONModel",
+				"uri":"model/TablePayload.json"
+			},
+			"medData": {
+			"type": "sap.ui.model.json.JSONModel",
+			"settings": {},
+			"preload": false
 			}
 		},
 		"resources": {
