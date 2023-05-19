@@ -83,6 +83,41 @@
 			"css": [{
 				"uri": "css/style.css"
 			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewPath": "Z_RateCard_pricing.view",
+				"controlId": "appId",
+				"controlAggregation": "pages"
+			},
+			"routes": [{
+				"name": "RateCard",
+				"pattern": "RateCard",
+				"target": "RateCard"
+			}, {
+				"name": "RateCard_Detail",
+				"pattern": "RateCard_Detail",
+				"target": "RateCard_Detail"
+			}, {
+				"name": "NewRateCard",
+				"pattern": "NewRateCard",
+				"target": "NewRateCard"
+			}],
+			"targets": {
+				"RateCard": {
+					"viewType": "XML",
+					"viewName": "RateCard"
+				},
+				"RateCard_Detail": {
+					"viewType": "XML",
+					"viewName": "Pricing_SubView_RateCardDetail"
+				},
+				"NewRateCard": {
+					"viewType": "XML",
+					"viewName": "NewRateCard"
+				}
+			}
 		}
 	}
 }
