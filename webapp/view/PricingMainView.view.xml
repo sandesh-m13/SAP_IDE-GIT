@@ -1,0 +1,26 @@
+<mvc:View controllerName="ui.pmc.pricing.controller.PricingMainView" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core">
+	<App>
+		<pages>
+			<Page showHeader="false">
+				<content>
+					<IconTabBar id="idMainViewIconTabBar" visible="true" selectedKey="rateCard" expanded="false" class="sapUiNoPadding">
+						<items>
+							<IconTabFilter key="rateCard" icon="sap-icon://approvals" iconColor="Neutral" text="{i18n>xtxt.PricingMainView.RateCard}">
+								<content>
+									<core:Fragment fragmentName="ui.pmc.pricing.view.Pricing_SubView_RateCard" type="XML"/>
+								</content>
+							</IconTabFilter>
+							<IconTabSeparator icon=""/>
+							<IconTabFilter key="Medallion" icon="sap-icon://attachment" text="{i18n>xtxt.PricingMainView.Medallion}" iconColor="Neutral" count=" 3">
+								<content>
+									<core:Fragment fragmentName="ui.pmc.pricing.view.Pricing_SubView_Medallion" type="XML"/>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:ui="sap.ui.table"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact" displayBlock="true">
+	<!--<layout:VerticalLayout class="tabContainer sapUiTinyMarginTop" >-->
+	<!--<Label text="Sandesh"/>-->
+	<!--</layout:VerticalLayout>-->
+	<App id="appId">
+		<pages>
+			<Page class="sapUiNoPadding sapUiSizeCompact">
+				<customHeader>
+					<OverflowToolbar>
+						<Title text="{i18n>xtlt.RateCard.RateCard}" wrapping="true"/>
+						<ToolbarSpacer/>
+					</OverflowToolbar>
+				</customHeader>
+				<content>
+					<f:SimpleForm maxContainerCols="3" layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3">
+						<f:content>
+							<core:Title/>
+							<Label text="{i18n>xfld.RateCard.RateCard}" textAlign="Left"></Label>
+							<Input id="idRateCardSearchInput" width="auto" showValueHelp="true" textAlign="Left"/>
+							<core:Title/>
+							<Label text="{i18n>xfld.RateCard.Description}" textAlign="Left"></Label>
+							<Input id="idDescSearchInput" showValueHelp="true" width="auto"/>
+							<core:Title/>
+							<Button class="sapUiTinyMargin" press="onPressNewRateCard" width="5rem" icon="sap-icon://add" tooltip="{i18n>xbtn.RateCard_Detail.Add}"
+								type="Unstyled"/>
+							<Button press="onPressGo" width="5rem" text="{i18n>xtxt.RateCard.Go}" type="Emphasized"/>
+						</f:content>
+					</f:SimpleForm>
+					<Table id="idOfferSearchTable" items="{purchaseitems>/RateCard_Table}" fixedLayout="false" growing="true" growingScrollToLoad="true"
+						includeItemInSelection="true" selectionChange="onRowSelect" updateFinished="onSearchFinished">
+						<headerToolbar>
+							<OverflowToolbar></OverflowToolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>xtxt.RateCard.TableName}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>xtxt.RateCard.Description}"/>
+							</Column>
+						</columns>
+						<ColumnListItem vAlign="Middle" type="Navigation" press="onRowPress">
+							<cells>
+								<Text text="{purchaseitems>TableName}"/>
+								<Text text="{purchaseitems>Description}"/>
+							</cells>
+						</ColumnListItem>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</core:FragmentDefinition>

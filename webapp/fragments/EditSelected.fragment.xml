@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog title="{i18n>xtlt.fragment.Edit}" contentWidth="400px" resizable="true" class="sapUiNoContentPadding sapUiSizeCompact">
+		<content>
+			<f:SimpleForm  maxContainerCols="1" layout="ResponsiveGridLayout" class="sapUiSizeCompact">
+				<Label text="{i18n>xtxt.RateCard_Detail.Country}"/>
+				<Input value="{EditData>/country}"/>
+				<Label text="{i18n>xtxt.RateCard_Detail.Currency}"/>
+				<Input value="{EditData>/currency}"/>
+				<Label text="{i18n>xtxt.RateCard_Detail.InvoicingModel}"/>
+				<Input value="{EditData>/invModel}"/>
+				<Label text="{i18n>xtxt.RateCard_Detail.UnitM}"/>
+				<Input value="{EditData>/UOM}"/>
+			</f:SimpleForm>
+			<Table width="100%" items="{purchaseitems>/FragmentData}">
+				<columns>
+					<Column>
+						<Text text="{i18n>xtxt.AddNew.RangeL}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>xtxt.AddNew.RangeH}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>xtxt.AddNew.RatePerU}"/>
+					</Column>
+				</columns>
+				<ColumnListItem vAlign="Middle" type="Navigation">
+					<cells>
+						<Text text="{purchaseitems>RangeL}"/>
+						<Text text="{purchaseitems>RangeH}"/>
+						<Text text="{purchaseitems>RatePerU}"/>
+					</cells>
+				</ColumnListItem>
+			</Table>
+		</content>
+		<beginButton>
+			<Button text="Save" press="onSaveData"/>
+		</beginButton>
+		<endButton>
+			<Button text="Cancel" press="onCancelEdit"/>
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

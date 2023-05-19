@@ -1,0 +1,101 @@
+<core:FragmentDefinition xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:ui="sap.ui.table"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact" displayBlock="true">
+	<!--<App id="appId">-->
+	<!--	<pages>-->
+	<!--		<Page id="idMainPage" title="{i18n>title}">-->
+	<!--			<content>-->
+					<!--Form Inputs-->
+	<!--				<f:SimpleForm id="idMainForm" editable="true">-->
+	<!--					<f:content>-->
+	<!--						<OverflowToolbar>-->
+								<!--<core:Title text=""/>-->
+	<!--							<Text text="{i18n>xtxt.Main.Form.Region}"/>-->
+	<!--							<Input id="idRegion" width="15%" showValueHelp="true"/>-->
+	<!--							<Text text=" "/>-->
+	<!--							<Text text="{i18n>xtxt.Main.Form.Country}"/>-->
+	<!--							<Input id="idCountry" width="15%" showValueHelp="true"/>-->
+	<!--							<Text text=" "/>-->
+								<!--<core:Title text=""/>-->
+	<!--							<Text text="{i18n>xtxt.Main.Form.Brt}"/>-->
+	<!--							<Input id="idBrt" width="15%" showValueHelp="true"/>-->
+	<!--							<Text text=" "/>-->
+	<!--							<Text text="{i18n>xtxt.Main.Form.Division}"/>-->
+	<!--							<Input id="idDivision" width="15%" showValueHelp="true"/>-->
+	<!--						</OverflowToolbar>-->
+	<!--					</f:content>-->
+	<!--				</f:SimpleForm>-->
+					<!--Get Items into Table-->
+	<!--				<Table id="tb01" items="{tableItems>/Payload}" mode="SingleSelectLeft">-->
+						<!--ToolBar for Buttons-->
+	<!--					<headerToolbar>-->
+	<!--						<OverflowToolbar>-->
+	<!--							<ToolbarSpacer/>-->
+	<!--							<Button text="{i18n>xbtn.Main.TablHeader.Clone}" press="onClone" type="Emphasized"/>-->
+	<!--							<Button text="{i18n>xbtn.Main.TablHeader.Update}" press="onUpdate" type="Emphasized"/>-->
+	<!--							<Button text="{i18n>xbtn.Main.TablHeader.New}" press="onNew" type="Emphasized"/>-->
+	<!--							<Button text="{i18n>xbtn.Main.TablHeader.Go}" press="onGo" type="Emphasized"/>-->
+	<!--						</OverflowToolbar>-->
+	<!--					</headerToolbar>-->
+	<!--					<columns>-->
+							<!--Columns with custom width-->
+	<!--						<Column width="5%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Discount}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="5%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Variance}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="5%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.From}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="6%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.To}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="17%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Medallion}"/>-->
+	<!--						</Column>-->
+	<!--						<Column>-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Region}"/>-->
+	<!--						</Column>-->
+	<!--						<Column>-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Country}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="6%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Subregion}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="7%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.BusinessUnit}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="7%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Division}"/>-->
+	<!--						</Column>-->
+	<!--						<Column width="6%">-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.ModelPin}"/>-->
+	<!--						</Column>-->
+	<!--						<Column>-->
+	<!--							<Text text="{i18n>xtlt.Main.TablColumn.Brt}"/>-->
+	<!--						</Column>-->
+	<!--					</columns>-->
+	<!--					<items>-->
+	<!--						<ColumnListItem vAlign="Middle">-->
+	<!--							<cells>-->
+	<!--								<Text text="{tableItems>Discount}"/>-->
+	<!--								<Text text="{tableItems>Variance}"/>-->
+	<!--								<Text text="{tableItems>From}"/>-->
+	<!--								<Text text="{tableItems>To}"/>-->
+	<!--								<Text text="{tableItems>Medallion}"/>-->
+	<!--								<Text text="{tableItems>Region}"/>-->
+	<!--								<Text text="{tableItems>Country}"/>-->
+	<!--								<Text text="{tableItems>Subregion}"/>-->
+	<!--								<Text text="{tableItems>BusinessUnit}"/>-->
+	<!--								<Text text="{tableItems>Division}"/>-->
+	<!--								<Text text="{tableItems>ModelPIN}"/>-->
+	<!--								<Text text="{tableItems>BRT}"/>-->
+	<!--							</cells>-->
+	<!--						</ColumnListItem>-->
+	<!--					</items>-->
+	<!--				</Table>-->
+	<!--			</content>-->
+	<!--		</Page>-->
+	<!--	</pages>-->
+	<!--</App>-->
+</core:FragmentDefinition>
