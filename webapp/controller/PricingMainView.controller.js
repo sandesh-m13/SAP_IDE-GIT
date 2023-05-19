@@ -10,24 +10,28 @@ sap.ui.define([
 		onInit: function() {
 
 		},
-		subscribeEvent: function() {
-			var oEventBus = this.getEventBus();
-			oEventBus.subscribe("attributeListChannel", "navBack", function(channel, fn, oEventData) {
-				this.onItemBack();
-			}.bind(this));
-		},
+
 		/*BOC SANDESHMALI 3/11/23-HPE-PRICICNG-RATECARD- Routes to detail view page */
 		onRowPress: function() {
 
-			// if (!this._oEditDataFragment) {
-			// 	this._oEditDataFragment = sap.ui.xmlfragment("ui.pmc.pricing.view.Pricing_SubView_RateCardDetail", this);
-			// 	this.getView().addDependent(this._oEditDataFragment);
-			// 	// this._oEditDataFragment.setModel(oModel, "EditData");
-			// }
-			// this._oEditDataFragment.open();
-
+			this.getView().byId("idSearchRateCard").setVisible(false);
+			this.getView().byId("idTableRateCard").setVisible(false);
+			this.getView().byId("idSearchDetailRC").setVisible(true);
+			this.getView().byId("idTableDetailRC").setVisible(true);
+			this.getView().byId("idBackPress").setVisible(true);
 		},
 		/*EOC SANDESHMALI 3/11/23-HPE-PRICICNG-RATECARD- Routes to detail view page */
+
+		/*BOC SANDESHMALI 5/11/23-HPE-PRICICNG-RATECARD- Routes back to HomePage */
+		onBackPress: function() {
+			this.getView().byId("idSearchRateCard").setVisible(true);
+			this.getView().byId("idTableRateCard").setVisible(true);
+			this.getView().byId("idSearchDetailRC").setVisible(false);
+			this.getView().byId("idTableDetailRC").setVisible(false);
+
+		},
+		/*EOC SANDESHMALI 5/11/23-HPE-PRICICNG-RATECARD- Routes back to HomePage */
+
 		/*BOC SANDESHMALI 3/11/23-HPE-PRICICNG-RATECARD- Routes to detail view page */
 		onPressGo: function() {
 

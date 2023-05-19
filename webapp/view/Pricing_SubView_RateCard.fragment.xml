@@ -1,54 +1,120 @@
 <core:FragmentDefinition xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:ui="sap.ui.table"
-	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact" displayBlock="true">
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" class="sapUiNoPadding sapUiSizeCompact" displayBlock="true">
 	<!--<layout:VerticalLayout class="tabContainer sapUiTinyMarginTop" >-->
 	<!--<Label text="Sandesh"/>-->
 	<!--</layout:VerticalLayout>-->
-	<App id="appId">
-		<pages>
-			<Page class="sapUiNoPadding sapUiSizeCompact">
-				<customHeader>
-					<OverflowToolbar>
-						<Title text="{i18n>xtlt.RateCard.RateCard}" wrapping="true"/>
-						<ToolbarSpacer/>
-					</OverflowToolbar>
-				</customHeader>
-				<content>
-					<f:SimpleForm maxContainerCols="3" layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3">
-						<f:content>
-							<core:Title/>
-							<Label text="{i18n>xfld.RateCard.RateCard}" textAlign="Left"></Label>
-							<Input id="idRateCardSearchInput" width="auto" showValueHelp="true" textAlign="Left"/>
-							<core:Title/>
-							<Label text="{i18n>xfld.RateCard.Description}" textAlign="Left"></Label>
-							<Input id="idDescSearchInput" showValueHelp="true" width="auto"/>
-							<core:Title/>
-							<Button class="sapUiTinyMargin" press="onPressNewRateCard" width="5rem" icon="sap-icon://add" tooltip="{i18n>xbtn.RateCard_Detail.Add}"
-								type="Unstyled"/>
-							<Button press="onPressGo" width="5rem" text="{i18n>xtxt.RateCard.Go}" type="Emphasized"/>
-						</f:content>
-					</f:SimpleForm>
-					<Table id="idOfferSearchTable" items="{purchaseitems>/RateCard_Table}" fixedLayout="false" growing="true" growingScrollToLoad="true"
-						includeItemInSelection="true" selectionChange="onRowSelect" updateFinished="onSearchFinished">
-						<headerToolbar>
-							<OverflowToolbar></OverflowToolbar>
-						</headerToolbar>
-						<columns>
-							<Column>
-								<Text text="{i18n>xtxt.RateCard.TableName}"/>
-							</Column>
-							<Column>
-								<Text text="{i18n>xtxt.RateCard.Description}"/>
-							</Column>
-						</columns>
-						<ColumnListItem vAlign="Middle" type="Navigation" press="onRowPress">
-							<cells>
-								<Text text="{purchaseitems>TableName}"/>
-								<Text text="{purchaseitems>Description}"/>
-							</cells>
-						</ColumnListItem>
-					</Table>
-				</content>
-			</Page>
-		</pages>
-	</App>
+	<!--<pages>-->
+	<!--	<Page class="sapUiNoPadding sapUiSizeCompact">-->
+	<!--		<content>-->
+	<f:SimpleForm id="idSearchRateCard" visible="true" class="sapUiNoPadding sapUiSizeCompact" maxContainerCols="3"
+		layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3">
+		<f:content>
+			<core:Title text="{i18n>xtlt.RateCard.RateCard}"/>
+			<Label text="{i18n>xfld.RateCard.RateCard}" textAlign="Left"></Label>
+			<Input id="idRateCardSearchInput" width="auto" showValueHelp="true" textAlign="Left"/>
+			<core:Title/>
+			<Label text="{i18n>xfld.RateCard.Description}" textAlign="Left"></Label>
+			<Input id="idDescSearchInput" showValueHelp="true" width="auto"/>
+			<core:Title/>
+		</f:content>
+	</f:SimpleForm>
+	<Table id="idTableRateCard" visible="true" class="sapUiNoPadding sapUiSizeCompact" items="{purchaseitems>/RateCard_Table}"
+		fixedLayout="false" growing="true" growingScrollToLoad="true" includeItemInSelection="true" selectionChange="onRowSelect"
+		updateFinished="onSearchFinished">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Button class="sapUiTinyMargin" press="onPressNewRateCard" width="5rem" icon="sap-icon://add" tooltip="{i18n>xbtn.RateCard_Detail.Add}"
+					type="Unstyled"/>
+				<Button press="onPressGo" width="5rem" text="{i18n>xtxt.RateCard.Go}" type="Emphasized"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>xtxt.RateCard.TableName}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtxt.RateCard.Description}"/>
+			</Column>
+		</columns>
+		<ColumnListItem vAlign="Middle" type="Navigation" press="onRowPress">
+			<cells>
+				<Text text="{purchaseitems>TableName}"/>
+				<Text text="{purchaseitems>Description}"/>
+			</cells>
+		</ColumnListItem>
+	</Table>
+	<f:SimpleForm id="idSearchDetailRC" class="sapUiNoPadding sapUiSizeCompact" visible="false" maxContainerCols="3"
+		layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3">
+		<f:toolbar>
+			<Button id="idBackPress" visible="false" width="3rem" press="onBackPress" type="Back"/>
+			<!--<Toolbar>-->
+			<!--	<Label text="{i18n>xfld.RateCard_Detail.ClassID}"/>-->
+			<!--	<Title text="RTC_SAAS_RATE_CARD"/>-->
+			<!--	<ToolbarSpacer/>-->
+			<!--	<Label text="{i18n>xfld.RateCard_Detail.ValidF}"/>-->
+			<!--	<DatePicker width="10rem"/>-->
+			<!--	<Label text="{i18n>xfld.RateCard_Detail.ValidT}"/>-->
+			<!--	<DatePicker width="10rem"/>-->
+			<!--</Toolbar>-->
+		</f:toolbar>
+		<f:content>
+			<core:Title text="{i18n>xfld.RateCard_Detail.ClassID}: RTC_SAAS_RATE_CARD"/>
+			<Label text="{i18n>xfld.RateCard_Detail.Country}"></Label>
+			<Input id="idCountrySearchInput" width="auto" showValueHelp="true"/>
+			<Label text="{i18n>xfld.RateCard_Detail.InvoicingModel}"></Label>
+			<Input id="idIModelSearchInput" width="auto" showValueHelp="true"/>
+			<core:Title text="{{i18n>xfld.RateCard_Detail.ValidF}:{path:'Date>/ValidFrom', formatter:'.formatter.formatDate'}}"/>
+			<!---->
+			<!--text="Valid From:{path: '12-05-2023',formatter:'.formatter.formatDate'},Valid To:{path: '12-05-2023',formatter:'.formatter.formatDate'}"/>-->
+			<!--<Text text="{path: '12-05-2023',formatter:'.formatter.formatDate'}"/>-->
+			<Label text="{i18n>xfld.RateCard_Detail.Currency}"></Label>
+			<Input showValueHelp="true" width="auto"/>
+			<Label text="{i18n>xfld.RateCard_Detail.UnitM}"></Label>
+			<Input id="idUnitSearchInput" width="auto" showValueHelp="true"/>
+			<core:Title/>
+		</f:content>
+	</f:SimpleForm>
+	<!--<Panel height="325px" width="100%" class="sapUiNoPadding sapUiSizeCompact">-->
+	<!--<content>-->
+	<Table id="idTableDetailRC" class="sapUiNoPadding sapUiSizeCompact" visible="false" mode="SingleSelectLeft"
+		items="{purchaseitems>/Purchase}" fixedLayout="false" width="100%" growing="true" growingScrollToLoad="true" includeItemInSelection="true"
+		selectionChange="onRowSelect" updateFinished="onSearchFinished">
+		<headerToolbar>
+			<Toolbar>
+				<Label text="{i18n>xfld.RateCard_Detail.MassMaintain}" class="sapUiTinyMargin"/>
+				<u:FileUploader id="idFileUploader" class="sapUiTinyMarginEnd" name="myFileUpload" sameFilenameAllowed="true" uploadUrl="upload/"
+					sendXHR="true" useMultipart="false" uploadOnChange="false" uploadComplete="onhandleUploadComplete"/>
+				<Button text="Upload File" press="handleUploadPress"/>
+				<Button icon="sap-icon://download" press="onDownloadTemplate" text="{i18n>xtxt.Mass.DownloadTemplate}"/>
+				<ToolbarSpacer/>
+				<Button class="sapUiTinyMargin" press="onPressEdit" icon="sap-icon://edit" tooltip="{i18n>xbtn.RateCard_Detail.Edit}" type="Transparent"/>
+				<Button class="sapUiTinyMargin" press="onPressAddNewData" width="5rem" icon="sap-icon://add" tooltip="{i18n>xbtn.RateCard_Detail.Add}"
+					type="Unstyled"/>
+				<Button class="sapUiTinyMargin" press="onPressGo" width="5rem" text="{i18n>xbtn.RateCard_Detail.Go}" type="Emphasized"/>
+			</Toolbar>
+		</headerToolbar>
+		<columns>
+			<Column>
+				<Text text="{i18n>xtxt.RateCard_Detail.Country}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtxt.RateCard_Detail.Currency}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtxt.RateCard_Detail.InvoicingModel}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtxt.RateCard_Detail.UnitM}"/>
+			</Column>
+		</columns>
+		<ColumnListItem vAlign="Middle" type="Navigation">
+			<cells>
+				<Text text="{purchaseitems>country}"/>
+				<Text text="{purchaseitems>currency}"/>
+				<Text text="{purchaseitems>invModel}"/>
+				<Text text="{purchaseitems>UOM}"/>
+				<!--<Text text="{purchaseitems>OrderQuantity}"/>-->
+			</cells>
+		</ColumnListItem>
+	</Table>
 </core:FragmentDefinition>
