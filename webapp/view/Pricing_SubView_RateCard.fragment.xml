@@ -7,7 +7,7 @@
 	<!--	<Page class="sapUiNoPadding sapUiSizeCompact">-->
 	<!--		<content>-->
 	<f:SimpleForm id="idSearchRateCard" visible="true" class="sapUiNoPadding sapUiSizeCompact" maxContainerCols="3"
-		layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3">
+		layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3" editable="true">
 		<f:content>
 			<core:Title text="{i18n>xtlt.RateCard.RateCard}"/>
 			<Label text="{i18n>xfld.RateCard.RateCard}" textAlign="Left"></Label>
@@ -23,6 +23,7 @@
 		updateFinished="onSearchFinished">
 		<headerToolbar>
 			<OverflowToolbar>
+				<ToolbarSpacer/>
 				<Button class="sapUiTinyMargin" press="onPressNewRateCard" width="5rem" icon="sap-icon://add" tooltip="{i18n>xbtn.RateCard_Detail.Add}"
 					type="Unstyled"/>
 				<Button press="onPressGo" width="5rem" text="{i18n>xtxt.RateCard.Go}" type="Emphasized"/>
@@ -44,7 +45,7 @@
 		</ColumnListItem>
 	</Table>
 	<f:SimpleForm id="idSearchDetailRC" class="sapUiNoPadding sapUiSizeCompact" visible="false" maxContainerCols="3"
-		layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3">
+		layout="ResponsiveGridLayout" labelMinWidth="40" columnsM="3" columnsL="3" columnsXL="3" editable="true">
 		<f:toolbar>
 			<Button id="idBackPress" visible="false" width="3rem" press="onBackPress" type="Back"/>
 			<!--<Toolbar>-->

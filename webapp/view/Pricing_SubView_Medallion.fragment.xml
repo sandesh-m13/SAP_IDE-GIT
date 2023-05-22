@@ -1,101 +1,133 @@
 <core:FragmentDefinition xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:ui="sap.ui.table"
-	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" class="sapUiSizeCompact" displayBlock="true">
-   	<App id="MedallionAppId" class="sapUiSizeCompact">
-		<pages>
-			<Page id="idMainPage" title="{i18n>xtlt.Medallion.Main}">
-				<content>
-					<!--Form Inputs-->
-					<f:SimpleForm id="idMainForm" editable="true">
-						<f:content>
-							<OverflowToolbar>
-								<!--<core:Title text=""/>-->
-								<Text text="{i18n>xtxt.Main.Form.Region}"/>
-								<Input id="idRegion" width="15%" showValueHelp="true"/>
-								<Text text=" "/>
-								<Text text="{i18n>xtxt.Main.Form.Country}"/>
-								<Input id="idCountry" width="15%" showValueHelp="true"/>
-								<Text text=" "/>
-								<!--<core:Title text=""/>-->
-								<Text text="{i18n>xtxt.Main.Form.Brt}"/>
-								<Input id="idBrt" width="15%" showValueHelp="true"/>
-								<Text text=" "/>
-								<Text text="{i18n>xtxt.Main.Form.Division}"/>
-								<Input id="idDivision" width="15%" showValueHelp="true"/>
-							</OverflowToolbar>
-						</f:content>
-					</f:SimpleForm>
-					<!--Get Items into Table-->
-					<Table id="tb01" items="{tableItems>/Payload}" mode="SingleSelectLeft">
-						<!--ToolBar for Buttons-->
-						<headerToolbar>
-							<OverflowToolbar>
-								<ToolbarSpacer/>
-								<Button text="{i18n>xbtn.Main.TablHeader.Clone}" press="onClone" type="Emphasized"/>
-								<Button text="{i18n>xbtn.Main.TablHeader.Update}" press="onUpdate" type="Emphasized"/>
-								<Button text="{i18n>xbtn.Main.TablHeader.New}" press="onNew" type="Emphasized"/>
-								<Button text="{i18n>xbtn.Main.TablHeader.Go}" press="onGo" type="Emphasized"/>
-							</OverflowToolbar>
-						</headerToolbar>
-						<columns>
-							<!--Columns with custom width-->
-							<Column width="5%">
-								<Text text="{i18n>xtlt.Main.TablColumn.Discount}"/>
-							</Column>
-							<Column width="5%">
-								<Text text="{i18n>xtlt.Main.TablColumn.Variance}"/>
-							</Column>
-							<Column width="5%">
-								<Text text="{i18n>xtlt.Main.TablColumn.From}"/>
-							</Column>
-							<Column width="6%">
-								<Text text="{i18n>xtlt.Main.TablColumn.To}"/>
-							</Column>
-							<Column width="17%">
-								<Text text="{i18n>xtlt.Main.TablColumn.Medallion}"/>
-							</Column>
-							<Column>
-								<Text text="{i18n>xtlt.Main.TablColumn.Region}"/>
-							</Column>
-							<Column>
-								<Text text="{i18n>xtlt.Main.TablColumn.Country}"/>
-							</Column>
-							<Column width="6%">
-								<Text text="{i18n>xtlt.Main.TablColumn.Subregion}"/>
-							</Column>
-							<Column width="7%">
-								<Text text="{i18n>xtlt.Main.TablColumn.BusinessUnit}"/>
-							</Column>
-							<Column width="7%">
-								<Text text="{i18n>xtlt.Main.TablColumn.Division}"/>
-							</Column>
-							<Column width="6%">
-								<Text text="{i18n>xtlt.Main.TablColumn.ModelPin}"/>
-							</Column>
-							<Column>
-								<Text text="{i18n>xtlt.Main.TablColumn.Brt}"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem vAlign="Middle">
-								<cells>
-									<Text text="{tableItems>Discount}"/>
-									<Text text="{tableItems>Variance}"/>
-									<Text text="{tableItems>From}"/>
-									<Text text="{tableItems>To}"/>
-									<Text text="{tableItems>Medallion}"/>
-									<Text text="{tableItems>Region}"/>
-									<Text text="{tableItems>Country}"/>
-									<Text text="{tableItems>Subregion}"/>
-									<Text text="{tableItems>BusinessUnit}"/>
-									<Text text="{tableItems>Division}"/>
-									<Text text="{tableItems>ModelPIN}"/>
-									<Text text="{tableItems>BRT}"/>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
-				</content>
-			</Page>
-		</pages>
-	</App>
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" class="sapUiNoPadding sapUiSizeCompact" displayBlock="true">
+	<!--INITIAL SCREEN CODE-->
+	<!--Form Inputs-->
+	<f:SimpleForm id="idMainForm" visible="true" editable="true" class="sapUiNoPadding sapUiSizeCompact" layout="ResponsiveGridLayout"
+		maxContainerCols="4" columnsM="4" columnsL="4" columnsXL="4">
+		<f:content>
+			<core:Title text=""/>
+			<Label text="{i18n>xtxt.Main.Form.Region}"/>
+			<Input id="idRegion" showValueHelp="true"/>
+			<core:Title text=""/>
+			<Label text="{i18n>xtxt.Main.Form.Country}"/>
+			<Input id="idCountry" showValueHelp="true"/>
+			<core:Title text=""/>
+			<Label text="{i18n>xtxt.Main.Form.Brt}"/>
+			<Input id="idBrt" showValueHelp="true"/>
+			<core:Title text=""/>
+			<Label text="{i18n>xtxt.Main.Form.Division}"/>
+			<Input id="idDivision" showValueHelp="true"/>
+		</f:content>
+	</f:SimpleForm>
+	<!--Get Items into Table-->
+	<Table id="idMedallionTable" visible="true" items="{tableItems>/Payload}" mode="SingleSelectLeft" class="sapUiNoPadding sapUiSizeCompact">
+		<!--ToolBar for Buttons-->
+		<headerToolbar>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button text="{i18n>xbtn.Main.TablHeader.Clone}" press="onClone" type="Emphasized"/>
+				<Button text="{i18n>xbtn.Main.TablHeader.Update}" press="onUpdate" type="Emphasized"/>
+				<Button text="{i18n>xbtn.Main.TablHeader.New}" press="onNew" type="Emphasized"/>
+				<Button text="{i18n>xbtn.Main.TablHeader.Go}" press="onGo" type="Emphasized"/>
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<!--Columns with custom width-->
+			<Column width="5%">
+				<Text text="{i18n>xtlt.Main.TablColumn.Discount}"/>
+			</Column>
+			<Column width="5%">
+				<Text text="{i18n>xtlt.Main.TablColumn.Variance}"/>
+			</Column>
+			<Column width="5%">
+				<Text text="{i18n>xtlt.Main.TablColumn.From}"/>
+			</Column>
+			<Column width="6%">
+				<Text text="{i18n>xtlt.Main.TablColumn.To}"/>
+			</Column>
+			<Column width="17%">
+				<Text text="{i18n>xtlt.Main.TablColumn.Medallion}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtlt.Main.TablColumn.Region}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtlt.Main.TablColumn.Country}"/>
+			</Column>
+			<Column width="6%">
+				<Text text="{i18n>xtlt.Main.TablColumn.Subregion}"/>
+			</Column>
+			<Column width="7%">
+				<Text text="{i18n>xtlt.Main.TablColumn.BusinessUnit}"/>
+			</Column>
+			<Column width="7%">
+				<Text text="{i18n>xtlt.Main.TablColumn.Division}"/>
+			</Column>
+			<Column width="6%">
+				<Text text="{i18n>xtlt.Main.TablColumn.ModelPin}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>xtlt.Main.TablColumn.Brt}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<Text text="{tableItems>Discount}"/>
+					<Text text="{tableItems>Variance}"/>
+					<Text text="{tableItems>From}"/>
+					<Text text="{tableItems>To}"/>
+					<Text text="{tableItems>Medallion}"/>
+					<Text text="{tableItems>Region}"/>
+					<Text text="{tableItems>Country}"/>
+					<Text text="{tableItems>Subregion}"/>
+					<Text text="{tableItems>BusinessUnit}"/>
+					<Text text="{tableItems>Division}"/>
+					<Text text="{tableItems>ModelPIN}"/>
+					<Text text="{tableItems>BRT}"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	<!--NEW MEDALLION SCREEN CODE-->
+	<f:SimpleForm id="idNewMedallionForm" visible="false" editable="true" class="sapUiNoPadding sapUiSizeCompact">
+		<f:toolbar>
+			<Toolbar>
+				<Button id="idBackBtn" icon="sap-icon://nav-back" press="onBack" type="Default"/>
+				<ToolbarSpacer/>
+				<Button id="idSaveBtn" text="{i18n>xbtn.NewMedallion.FormHeader.Save}" press="onSave" type="Emphasized"/>
+				<Button id="idCancelBtn" text="{i18n>xbtn.NewMedallion.FormHeader.Cancel}" press="onCancel" type="Default"/>
+			</Toolbar>
+		</f:toolbar>
+		<f:content>
+			<!--First Column Field -->
+			<core:Title text="{i18n>xtxt.NewMedallion.FormHeader.Keys}"/>
+			<Label class="sapUiSmallMarginRight" text="{i18n>xlbl.NewMedallion.FormField.MedallionCat}" labelFor="idNewCategory"></Label>
+			<Input id="idNewCategory" value="{FormModel>/Medallion}" width="70%" showValueHelp="true" required="true"></Input>
+			<Label class="sapUiSmallMarginRight" text="{i18n>xlbl.NewMedallion.FormField.Region}"></Label>
+			<Input id="idNewRegion" value="{FormModel>/Region}" width="70%" showValueHelp="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.Country}"></Label>
+			<Input id="idNewCountry" value="{FormModel>/Country}" width="70%" showValueHelp="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.Subregion}"></Label>
+			<Input id="idNewSubregion" value="{FormModel>/Subregion}" width="70%" showValueHelp="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.BusinessUnit}"></Label>
+			<Input id="idNewBusinessUnit" value="{FormModel>/BusinessUnit}" width="70%"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.Division}"></Label>
+			<Input id="idNewDivision" value="{FormModel>/Division}" width="70%" showValueHelp="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.ModelPin}"></Label>
+			<Input id="idNewModelPin" value="{FormModel>/ModelPIN}" width="70%" showValueHelp="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.Brt}"></Label>
+			<Input id="idNewBrt" value="{FormModel>/BRT}" width="70%" showValueHelp="true"></Input>
+			<!--Second Column Field -->
+			<core:Title text="{i18n>xtxt.NewMedallion.FormHeader.Discount}"/>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.Discount}" labelFor="idNewDiscount"></Label>
+			<Input id="idNewDiscount" value="{FormModel>/Discount}" width="70%" required="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.Variance}" labelFor="idNewVariance"></Label>
+			<Input id="idNewVariance" value="{FormModel>/Variance}" width="70%" required="true"></Input>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.ValidFrom}" labelFor="idNewValidFrom"></Label>
+			<DatePicker id="idNewValidFrom" value="{FormModel>/From}" width="70%" required="true"/>
+			<Label text="{i18n>xlbl.NewMedallion.FormField.ValidTo}" labelFor="idNewValidTo"></Label>
+			<DatePicker id="idNewValidTo" value="{FormModel>/To}" width="70%" required="true"/>
+		</f:content>
+	</f:SimpleForm>
 </core:FragmentDefinition>

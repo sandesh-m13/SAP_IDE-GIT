@@ -77,6 +77,10 @@
 			"type": "sap.ui.model.json.JSONModel",
 			"settings": {},
 			"preload": false
+			},
+			"AddEditData": {
+				"type": "sap.ui.model.json.JSONModel"
+
 			}
 		},
 		"resources": {
