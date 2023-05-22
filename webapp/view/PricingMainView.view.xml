@@ -4,11 +4,11 @@
 		<pages>
 			<Page showHeader="false">
 				<content>
-					<IconTabBar id="idMainViewIconTabBar" visible="true" selectedKey="rateCard" expanded="false" class="sapUiNoPadding">
+					<IconTabBar id="idMainViewIconTabBar" visible="true" selectedKey="rateCard" expanded="true" class="sapUiNoPadding">
 						<items>
 							<IconTabFilter key="rateCard" icon="sap-icon://approvals" iconColor="Neutral" text="{i18n>xtxt.PricingMainView.RateCard}">
 								<content>
-									<core:Fragment  fragmentName="ui.pmc.pricing.view.Pricing_SubView_RateCard" type="XML"/>
+									<core:Fragment fragmentName="ui.pmc.pricing.view.Pricing_SubView_RateCard" type="XML"/>
 								</content>
 							</IconTabFilter>
 							<IconTabSeparator icon=""/>
