@@ -1,11 +1,11 @@
 <core:FragmentDefinition xmlns:html="http://www.w3.org/1999/xhtml" xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:ui="sap.ui.table"
 	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" class="sapUiNoPadding sapUiSizeCompact" displayBlock="true">
 	<!--INITIAL SCREEN CODE-->
-	<!--Form Inputs-->
+	Form Inputs
 	<f:SimpleForm id="idMainForm" visible="true" editable="true" class="sapUiNoPadding sapUiSizeCompact" layout="ResponsiveGridLayout"
 		maxContainerCols="4" columnsM="4" columnsL="4" columnsXL="4">
 		<f:content>
-			<core:Title text=""/>
+			<core:Title text="Medallion"/>
 			<Label text="{i18n>xtxt.Main.Form.Region}"/>
 			<Input id="idRegion" showValueHelp="true"/>
 			<core:Title text=""/>
@@ -25,10 +25,12 @@
 		<headerToolbar>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
-				<Button text="{i18n>xbtn.Main.TablHeader.Clone}" press="onClone" type="Emphasized"/>
-				<Button text="{i18n>xbtn.Main.TablHeader.Update}" press="onUpdate" type="Emphasized"/>
-				<Button text="{i18n>xbtn.Main.TablHeader.New}" press="onNew" type="Emphasized"/>
-				<Button text="{i18n>xbtn.Main.TablHeader.Go}" press="onGo" type="Emphasized"/>
+				<Button id="idCloneBtn" text="{i18n>xbtn.Main.TablHeader.Clone}" press="onClone" type="Emphasized"/>
+				<Button id="idUpdateBtn" text="{i18n>xbtn.Main.TablHeader.Update}" press="onUpdate" type="Emphasized"/>
+				<Button id="idNewBtn" text="{i18n>xbtn.Main.TablHeader.New}" press="onNew" type="Emphasized"/>
+				<Button id="idGoBtn" text="{i18n>xbtn.Main.TablHeader.Go}" press="onGo" type="Emphasized"/>
+				<Button id="idUpdateSaveBtn" text="Save" press="onUpdateSave" type="Emphasized" visible="False"/>
+				<Button id="idUpdateCancelBtn" text="Cancel" press="onUpdateCancel" type="Default" visible="False"/>
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
@@ -39,13 +41,13 @@
 			<Column width="5%">
 				<Text text="{i18n>xtlt.Main.TablColumn.Variance}"/>
 			</Column>
-			<Column width="5%">
+			<Column width="7%">
 				<Text text="{i18n>xtlt.Main.TablColumn.From}"/>
 			</Column>
-			<Column width="6%">
+			<Column width="7%">
 				<Text text="{i18n>xtlt.Main.TablColumn.To}"/>
 			</Column>
-			<Column width="17%">
+			<Column width="20%">
 				<Text text="{i18n>xtlt.Main.TablColumn.Medallion}"/>
 			</Column>
 			<Column>
@@ -73,18 +75,18 @@
 		<items>
 			<ColumnListItem vAlign="Middle">
 				<cells>
-					<Text text="{tableItems>Discount}"/>
-					<Text text="{tableItems>Variance}"/>
-					<Text text="{tableItems>From}"/>
-					<Text text="{tableItems>To}"/>
-					<Text text="{tableItems>Medallion}"/>
-					<Text text="{tableItems>Region}"/>
-					<Text text="{tableItems>Country}"/>
-					<Text text="{tableItems>Subregion}"/>
-					<Text text="{tableItems>BusinessUnit}"/>
-					<Text text="{tableItems>Division}"/>
-					<Text text="{tableItems>ModelPIN}"/>
-					<Text text="{tableItems>BRT}"/>
+					<Input value="{tableItems>Discount}" editable="false"/>
+					<Input value="{tableItems>Variance}" editable="false"/>
+					<Input value="{tableItems>From}" editable="false"/>
+					<Input value="{tableItems>To}" editable="false"/>
+					<Input value="{tableItems>Medallion}" editable="false"/>
+					<Input value="{tableItems>Region}" editable="false"/>
+					<Input value="{tableItems>Country}" editable="false"/>
+					<Input value="{tableItems>Subregion}" editable="false"/>
+					<Input value="{tableItems>BusinessUnit}" editable="false"/>
+					<Input value="{tableItems>Division}" editable="false"/>
+					<Input value="{tableItems>ModelPIN}" editable="false"/>
+					<Input value="{tableItems>BRT}" editable="false"/>
 				</cells>
 			</ColumnListItem>
 		</items>
@@ -125,7 +127,13 @@
 			<Label text="{i18n>xlbl.NewMedallion.FormField.Variance}" labelFor="idNewVariance"></Label>
 			<Input id="idNewVariance" value="{FormModel>/Variance}" width="70%" required="true"></Input>
 			<Label text="{i18n>xlbl.NewMedallion.FormField.ValidFrom}" labelFor="idNewValidFrom"></Label>
-			<DatePicker id="idNewValidFrom" value="{FormModel>/From}" width="70%" required="true"/>
+			<DatePicker id="idNewValidFrom" value="{
+				path: '/date',
+				type: 'sap.ui.model.type.Date',
+				formatOptions: {
+					style: 'short'
+				}
+			}" width="70%" required="true"/>
 			<Label text="{i18n>xlbl.NewMedallion.FormField.ValidTo}" labelFor="idNewValidTo"></Label>
 			<DatePicker id="idNewValidTo" value="{FormModel>/To}" width="70%" required="true"/>
 		</f:content>

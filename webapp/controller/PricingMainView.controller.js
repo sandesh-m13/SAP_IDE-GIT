@@ -5,6 +5,7 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
 	"sap/ui/export/Spreadsheet"
+
 ], function(Controller, BaseController, Filter, FilterOperator, MessageToast, Spreadsheet) {
 	"use strict";
 
@@ -233,10 +234,17 @@ sap.ui.define([
 
 		/*BOC KomalDumbre 5/22/23-HPE-PRICICNG-MEDALLION- Routes to new medallion view page */
 		onNew: function() {
-		    this.getView().getModel("medData").setData({});
+			this.getView().getModel("medData").setData({});
 			this.getView().byId("idMainForm").setVisible(false);
 			this.getView().byId("idMedallionTable").setVisible(false);
 			this.getView().byId("idNewMedallionForm").setVisible(true);
+			var currentDate = new Date();
+			var currentYear = currentDate.getFullYear(); // Get the current year
+			var currentMonth = currentDate.getMonth() + 1; // Get the current month (0-11, so we add 1)
+			var currentDay = currentDate.getDate(); // Get the current day of the month
+			// Construct the date string in the desired format (e.g., "YYYY-MM-DD")
+			var dateString = currentYear + '-' + currentMonth + '-' + currentDay;
+			this.getView().byId("idNewValidFrom").setValue(dateString);
 		},
 		/*EOC KomalDumbre 5/22/23-HPE-PRICICNG-MEDALLION- Routes to new medallion view page */
 
@@ -282,45 +290,101 @@ sap.ui.define([
 		},
 		/*EOC KomalDumbre 5/17/23-HPE-PRICICNG-MEDALLION- Post call to add a new entry */
 
-		/*BOC KomalDumbre 5/22/23-HPE-PRICICNG-MEDALLION- Get call to edit entry */
-		onUpdate: function() {
+		/*BOC KomalDumbre 5/25/23-HPE-PRICICNG-MEDALLION- Making Selected Row editable and adjusting UI for update */
+		onUpdate: function(evt) {
 			try {
 				var oSelectedData = this.byId("idMedallionTable").getSelectedItem().getBindingContext("tableItems").getObject(); //Get selected data from table
 				if (oSelectedData) {
-					var oModel = this.getView().getModel("medData");//Global json
-					oModel.setData(oSelectedData);
-					// this.getView().byId("idNewMedallionForm").getModel("FormModel").setData(oSelectedData); //Set data to form
-					this.getView().byId("idNewMedallionForm").setModel(oModel,"FormModel"); //Set data in FormModel
-					//Navigating UI
-					this.getView().byId("idMainForm").setVisible(false);
-					this.getView().byId("idMedallionTable").setVisible(false);
-					this.getView().byId("idNewMedallionForm").setVisible(true);
+					// Making Selected Row Editable
+					evt.getSource().getParent().getParent().getSelectedItem().getCells()[0].setEditable(true);
+					evt.getSource().getParent().getParent().getSelectedItem().getCells()[1].setEditable(true);
+					evt.getSource().getParent().getParent().getSelectedItem().getCells()[2].setEditable(true);
+					evt.getSource().getParent().getParent().getSelectedItem().getCells()[3].setEditable(true);
+					// Disabling Form Editing
+					this.getView().byId("idRegion").setEditable(false);
+					this.getView().byId("idCountry").setEditable(false);
+					this.getView().byId("idBrt").setEditable(false);
+					this.getView().byId("idDivision").setEditable(false);
+					// Removing Clone, Update, New and Go Buttons from toolbar
+					this.getView().byId("idCloneBtn").setVisible(false);
+					this.getView().byId("idUpdateBtn").setVisible(false);
+					this.getView().byId("idNewBtn").setVisible(false);
+					this.getView().byId("idGoBtn").setVisible(false);
+					// Adding Update Save and Cancel Buttons to toolbar
+					this.getView().byId("idUpdateSaveBtn").setVisible(true);
+					this.getView().byId("idUpdateCancelBtn").setVisible(true);
 				}
-
 			} catch (err) {
 				// MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("ymse.SelRec"));
-				 MessageToast.show("No Data Selected!");
+				MessageToast.show("No Data Selected!");
 			}
+		},
+		/*EOC KomalDumbre 5/25/23-HPE-PRICICNG-MEDALLION- Making Selected Row editable and adjusting UI for update*/
+
+		onUpdateSave: function(evt) {
+
+			var oModel = this.getOwnerComponent().getModel(); // OData Model
+			// var oSelectedData = evt.getSource().getParent().getParent().getSelectedItem().getBindingContext("tableItems").getObject(); //Selected data from table
+			var oSelectedData = oSelectedData = this.byId("idMedallionTable").getSelectedItem().getBindingContext("tableItems").getObject(); //Selected data from table
+			var uniquekey = oSelectedData.uniquekey.trim();
+			var sPath = "/(Empid='" + uniquekey + "')"; // Unique Key
+			sPath = "/EntitySet('" + oSelectedData.uniquekey + "')"; //Pass entity set & unique key of selected data
+			oModel.update(sPath, oSelectedData, {
+				success: function() {
+					MessageToast.show("Details Updated!");
+				}.bind(this),
+				error: function() {
+					MessageToast.show("Failed to Update!");
+				}.bind(this)
+			});
 
 		},
-		/*EOC KomalDumbre 5/22/23-HPE-PRICICNG-MEDALLION- Get call to edit entry */
 
-		/*BOC KomalDumbre 5/17/23-HPE-PRICICNG-MEDALLION- Update call to edit an entry */
-		onUpdateSave: function(evt) {
-				//OData
-				var oDataModel = this.getOwnerComponent().getModel(), //OData Model
-					oSelectedData = evt.getSource().getBindingContext("medData").getObject(), //Get data from table
-					sPath = "/EntitySet('" + oSelectedData.uniquekey + "')"; //Pass entity set & unique selected key
-				oDataModel.update(sPath, oSelectedData, {
-					success: function(data) {
-						MessageToast.show("Details Updated!");
-					}.bind(this),
-					error: function(error) {
-						MessageToast.show("No Data Selected!");
-					}.bind(this)
-				});
+		/*BOC KomalDumbre 5/25/23-HPE-PRICICNG-MEDALLION- Cancel Update Button */
+		onUpdateCancel: function(evt) {
+			// Making rows back to non-editable
+			evt.getSource().getParent().getParent().getSelectedItem().getCells()[0].setEditable(false);
+			evt.getSource().getParent().getParent().getSelectedItem().getCells()[1].setEditable(false);
+			evt.getSource().getParent().getParent().getSelectedItem().getCells()[2].setEditable(false);
+			evt.getSource().getParent().getParent().getSelectedItem().getCells()[3].setEditable(false);
+			// Enabling Form Editing
+			this.getView().byId("idRegion").setEditable(true);
+			this.getView().byId("idCountry").setEditable(true);
+			this.getView().byId("idBrt").setEditable(true);
+			this.getView().byId("idDivision").setEditable(true);
+			// Adding Clone, Update, New and Go Buttons to toolbar
+			this.getView().byId("idCloneBtn").setVisible(true);
+			this.getView().byId("idUpdateBtn").setVisible(true);
+			this.getView().byId("idNewBtn").setVisible(true);
+			this.getView().byId("idGoBtn").setVisible(true);
+			// Removing Update Save and Cancel Buttons from toolbar
+			this.getView().byId("idUpdateSaveBtn").setVisible(false);
+			this.getView().byId("idUpdateCancelBtn").setVisible(false);
+		},
+		/*EOC KomalDumbre 5/25/23-HPE-PRICICNG-MEDALLION- Cancel Update Button */
+
+		/*BOC KomalDumbre 5/25/23-HPE-PRICICNG-MEDALLION- Get call to clone an entry */
+		onClone: function() {
+				try {
+					var oSelectedData = this.byId("idMedallionTable").getSelectedItem().getBindingContext("tableItems").getObject(); //Get selected data from table
+					if (oSelectedData) {
+						var oModel = this.getView().getModel("medData"); //Global json
+						oModel.setData(oSelectedData);
+						// this.getView().byId("idNewMedallionForm").getModel("FormModel").setData(oSelectedData); //Set data to form
+						this.getView().byId("idNewMedallionForm").setModel(oModel, "FormModel"); //Set data in FormModel
+						//Navigating UI
+						this.getView().byId("idMainForm").setVisible(false);
+						this.getView().byId("idMedallionTable").setVisible(false);
+						this.getView().byId("idNewMedallionForm").setVisible(true);
+					}
+
+				} catch (err) {
+					// MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("ymse.SelRec"));
+					MessageToast.show("No Data Selected!");
+				}
+
 			}
-			/*EOC KomalDumbre 5/17/23-HPE-PRICICNG-MEDALLION- Update call to edit an entry */
+			/*EOC KomalDumbre 5/25/23-HPE-PRICICNG-MEDALLION- Get call to clone an entry */
 
 	});
 });

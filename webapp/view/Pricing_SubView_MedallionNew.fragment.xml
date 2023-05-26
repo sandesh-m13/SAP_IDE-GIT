@@ -7,7 +7,7 @@
 				<content>
 					<Bar>
 						<contentRight>
-							<Button text="{i18n>xbtn.NewMedallion.FormHeader.Save}" press="onUpdate" type="Emphasized"/>
+							<Button text="{i18n>xbtn.NewMedallion.FormHeader.Save}" press="onSave" type="Emphasized"/>
 							<Button text="{i18n>xbtn.NewMedallion.FormHeader.Cancel}" press="onCancel" type="Default"/>
 						</contentRight>
 					</Bar>
