@@ -4,17 +4,122 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast",
+<<<<<<< HEAD
 	"sap/ui/export/Spreadsheet"
 
 ], function(Controller, BaseController, Filter, FilterOperator, MessageToast, Spreadsheet) {
+=======
+	"sap/ui/export/Spreadsheet",
+	"sap/m/MessageBox",
+	"sap/ui/core/Fragment"
+], function(Controller, BaseController, Filter, FilterOperator, MessageToast, Spreadsheet, MessageBox, Fragment) {
+>>>>>>> branch 'main' of https://github.com/sandesh-m13/SAP_IDE-GIT.git
 	"use strict";
 
 	return BaseController.extend("ui.pmc.pricing.controller.PricingMainView", {
 		onInit: function() {
 
 		},
+		// test
+		onadddd: function() {
+			MessageBox.information("HI there");
+		},
 
-		/*BOC SANDESHMALI 3/11/23-HPE-PRICICNG-RATECARD- Routes to detail view page */
+		/*BOC SANDESHMALI 5/24/23-HPE-PRICICNG-RATECARD-(Testing) information for pricing upload tool */
+		onInfoButtonPress: function(oEvent) {
+			var oHBox = oEvent.getSource().getParent();
+			var oLabel = oHBox.getItems()[1]; // Assuming the label is the second item in the HBox
+			var sLabelText = oLabel.getText();
+			var sFieldInformation = "Information about " + sLabelText; // Replace with your actual information
+
+			// Show the field information in a dialog or any other desired method
+			MessageBox.information(sFieldInformation, {
+				title: "Field Information"
+			});
+		},
+
+		/*EOC SANDESHMALI 3/11/23-HPE-PRICICNG-RATECARD- Routes to detail view page */
+
+		/*BOC SANDESHMALI 5/24/23-HPE-PRICICNG-RATECARD-Lazy loading of views*/
+		// fragmentName: function() {
+		// 	return "ui.pmc.pricing.view.Pricing_SubView_Medallion";
+		// },
+		onIconTabBarSelected: function(oEvent) {
+			var oRouter = this.getOwnerComponent().getRouter();
+			// if (oEvent.getParameter("selectedKey") === "AttributeGroup") {
+
+			// 	// this._oRouter.navTo("RouteApp",{},true);
+			// 	oRouter.getTargets().display("MainToAttributeGroup");
+			// }
+
+			var sSelectedTab = oEvent.getParameter("selectedKey");
+			// var oEventBus = this.getOwnerComponent().getEventBus();
+			switch (sSelectedTab) {
+				case "medallion":
+					if (!this.byId("medallionFragment")) {
+						// var oLayout = this.getView().byId('idMedallion'), //don't forget to set id for a VerticalLayout
+						// 	oFragment = sap.ui.xmlfragment(this.fragmentName.bind(this));
+						// oLayout.addContent(oFragment);
+						// Fragment.load({
+						// 	name: "ui.pmc.pricing.view.Pricing_SubView_Medallion"
+						// }).then(function(oContent) {
+						// 	if (!this.isDestroyStarted()) {
+						// 		// do stuff
+						// 	}
+						// });
+
+						this._medallionFragment = sap.ui.xmlfragment({
+							fragmentName: "ui.pmc.pricing.view.Pricing_SubView_Medallion",
+							controller: this
+						});
+					this._medallionFragment.open();
+						// this.getView().addContent(this._medallionFragment);
+
+						// this._medallionFragment.then(function(fragment) {
+						// 	this.byId("idMedallion").addContent(fragment);
+						// }.bind(this));
+					}
+					break;
+
+					// case "medallion":
+					// 	// this.loadMedallionFragment().then(function(oFragment) {
+					// 	// 	// Once the fragment is loaded, you can display it or perform any other operations
+					// 	// 	oRouter.getTargets().display("Medallion");
+					// 	// 	sap.m.MessageToast.show("Hiii");
+					// 	// 	// oEventBus.publish("attributeGroupChannel", "navBack", {});
+					// 	// });
+					// 	// sap.ui.xmlfragment({
+					// 	// 	name: "ui.pmc.pricing.view.Pricing_SubView_Medallion",
+					// 	// 	id: this.getView().getId(),
+					// 	// 	controller: this
+					// 	// }).
+					// 	if (!this.byId("medallionFragment")) {
+					// 		this._medallionFragment = sap.ui.xmlfragment("ui.pmc.pricing.view.Pricing_SubView_Medallion", this);
+
+					// 		this._medallionFragment.then(function(fragment) {
+					// 			this.byId("idMedallion").addContent(fragment);
+					// 		}.bind(this));
+					// 	}
+					// 	break;
+
+				case "third":
+					oRouter.getTargets().display("TestView");
+					// oEventBus.publish("attributeGroupChannel", "navBack", {});
+					break;
+			}
+
+		},
+		// loadMedallionFragment: function() {
+		// 	return new Promise(function(resolve, reject) {
+		// 		sap.ui.require(["ui.pmc.pricing.view.Medallion.fragment"], function(MedallionFragment) {
+		// 			resolve(MedallionFragment);
+		// 		}, function(error) {
+		// 			reject(error);
+		// 		});
+		// 	});
+		// },
+		/*BOC SANDESHMALI 5/24/23-HPE-PRICICNG-RATECARD-Lazy loading of views*/
+
 		onRowPress: function() {
 
 			this.getView().byId("idSearchRateCard").setVisible(false);
@@ -295,6 +400,7 @@ sap.ui.define([
 			try {
 				var oSelectedData = this.byId("idMedallionTable").getSelectedItem().getBindingContext("tableItems").getObject(); //Get selected data from table
 				if (oSelectedData) {
+<<<<<<< HEAD
 					// Making Selected Row Editable
 					evt.getSource().getParent().getParent().getSelectedItem().getCells()[0].setEditable(true);
 					evt.getSource().getParent().getParent().getSelectedItem().getCells()[1].setEditable(true);
@@ -313,6 +419,16 @@ sap.ui.define([
 					// Adding Update Save and Cancel Buttons to toolbar
 					this.getView().byId("idUpdateSaveBtn").setVisible(true);
 					this.getView().byId("idUpdateCancelBtn").setVisible(true);
+=======
+					var oModel = this.getView().getModel("medData"); //Global json
+					oModel.setData(oSelectedData);
+					// this.getView().byId("idNewMedallionForm").getModel("FormModel").setData(oSelectedData); //Set data to form
+					this.getView().byId("idNewMedallionForm").setModel(oModel, "FormModel"); //Set data in FormModel
+					//Navigating UI
+					this.getView().byId("idMainForm").setVisible(false);
+					this.getView().byId("idMedallionTable").setVisible(false);
+					this.getView().byId("idNewMedallionForm").setVisible(true);
+>>>>>>> branch 'main' of https://github.com/sandesh-m13/SAP_IDE-GIT.git
 				}
 			} catch (err) {
 				// MessageToast.show(this.getView().getModel("i18n").getResourceBundle().getText("ymse.SelRec"));

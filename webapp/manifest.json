@@ -40,18 +40,29 @@
 	"sap.ui5": {
 		"rootView": {
 			"viewName": "ui.pmc.pricing.view.PricingMainView",
-			"type": "XML"
+			"type": "XML",
+			"async": true
 		},
 		"dependencies": {
 			"minUI5Version": "1.30.0",
 			"libs": {
 				"sap.ui.core": {},
 				"sap.m": {},
-				"sap.ui.layout": {},
-				"sap.ushell": {},
-				"sap.collaboration": {},
-				"sap.ui.comp": {},
-				"sap.uxap": {}
+				"sap.ui.layout": {
+
+				},
+				"sap.ushell": {
+					"lazy": true
+				},
+				"sap.collaboration": {
+					"lazy": true
+				},
+				"sap.ui.comp": {
+					"lazy": true
+				},
+				"sap.uxap": {
+					"lazy": true
+				}
 			}
 		},
 		"contentDensities": {
@@ -64,19 +75,20 @@
 				"settings": {
 					"bundleName": "ui.pmc.pricing.i18n.i18n"
 				}
+
 			},
 			"purchaseitems": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/purchase.json"
 			},
-			"tableItems":{
-			    "type":"sap.ui.model.json.JSONModel",
-				"uri":"model/TablePayload.json"
+			"tableItems": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/TablePayload.json"
 			},
 			"medData": {
-			"type": "sap.ui.model.json.JSONModel",
-			"settings": {},
-			"preload": false
+				"type": "sap.ui.model.json.JSONModel",
+				"settings": {},
+				"preload": false
 			},
 			"AddEditData": {
 				"type": "sap.ui.model.json.JSONModel"
@@ -88,38 +100,44 @@
 				"uri": "css/style.css"
 			}]
 		},
+
 		"routing": {
 			"config": {
 				"routerClass": "sap.m.routing.Router",
-				"viewPath": "Z_RateCard_pricing.view",
+				"viewPath": "ui.pmc.pricing.view",
 				"controlId": "appId",
-				"controlAggregation": "pages"
+				"controlAggregation": "pages",
+				"async": true
 			},
 			"routes": [{
-				"name": "RateCard",
-				"pattern": "RateCard",
-				"target": "RateCard"
-			}, {
-				"name": "RateCard_Detail",
-				"pattern": "RateCard_Detail",
-				"target": "RateCard_Detail"
-			}, {
-				"name": "NewRateCard",
-				"pattern": "NewRateCard",
-				"target": "NewRateCard"
+				"vieName": "RouteApp",
+				"pattern": "",
+				"target": "TargetApp"
 			}],
 			"targets": {
-				"RateCard": {
-					"viewType": "XML",
-					"viewName": "RateCard"
+				"TargetApp": {
+					"id": "PrcMainView",
+					"viewName": "PricingMainView",
+					"level": 1,
+					"viewType": "XML"
 				},
-				"RateCard_Detail": {
-					"viewType": "XML",
-					"viewName": "Pricing_SubView_RateCardDetail"
+				"TestView": {
+					"parent": "TargetApp",
+					"id": "testView",
+					"viewName": "TestView",
+					"controlId": "idTestView",
+					"controlAggregation": "content",
+					"viewType": "XML"
+
 				},
-				"NewRateCard": {
-					"viewType": "XML",
-					"viewName": "NewRateCard"
+				"Medallion": {
+					"parent": "TargetApp",
+					"id": "medallion",
+					"fragmentName": "Pricing_SubView_Medallion",
+					"controlId": "idMedallion",
+					"controlAggregation": "content",
+					"fragmentType": "XML"
+
 				}
 			}
 		}

@@ -1,10 +1,11 @@
 <mvc:View controllerName="ui.pmc.pricing.controller.PricingMainView" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core">
-	<App>
+	<App id="appId">
 		<pages>
 			<Page showHeader="false">
 				<content>
-					<IconTabBar id="idMainViewIconTabBar" visible="true" selectedKey="rateCard" expanded="true" class="sapUiNoPadding">
+					<IconTabBar id="idMainViewIconTabBar" select="onIconTabBarSelected" visible="true" selectedKey="rateCard" expanded="true"
+						class="sapUiNoPadding">
 						<items>
 							<IconTabFilter key="rateCard" icon="sap-icon://approvals" iconColor="Neutral" text="{i18n>xtxt.PricingMainView.RateCard}">
 								<content>
@@ -12,9 +13,16 @@
 								</content>
 							</IconTabFilter>
 							<IconTabSeparator icon=""/>
-							<IconTabFilter key="Medallion" icon="sap-icon://attachment" text="{i18n>xtxt.PricingMainView.Medallion}" iconColor="Neutral" count=" 3">
+							<IconTabFilter key="medallion" id="idMedallion" icon="sap-icon://attachment" text="{i18n>xtxt.PricingMainView.Medallion}"
+								iconColor="Neutral">
 								<content>
-									<core:Fragment fragmentName="ui.pmc.pricing.view.Pricing_SubView_Medallion" type="XML"/>
+									<!--<VBox id="medallionContainer"/>-->
+									<!--<core:Fragment fragmentName="{/myDynamicFragment}" type="XML"/>-->
+								</content>
+							</IconTabFilter>
+							<IconTabFilter id="idTestView" key="third" icon="sap-icon://activity-items" iconColor="Neutral">
+								<content>
+									<!--<mvc:XMLView viewName="ui.pmc.pricing.view.TestView"/>-->
 								</content>
 							</IconTabFilter>
 						</items>
